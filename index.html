@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Síntese final — versão telemóvel</title>
+  <style>
+    :root{
+      --bg:#cfe3ef;
+      --card:#ffffff;
+      --ink:#17384c;
+      --primary:#0b6f95;
+      --primary-dark:#084f68;
+      --accent:#ef3b3a;
+      --line:#d7e7ef;
+      --soft:#e9f4f9;
+      --muted:#547180;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+    }
+    .wrap{
+      max-width:720px;
+      margin:0 auto;
+      padding:14px;
+    }
+    .hero{
+      background:#fff;
+      border-radius:24px;
+      padding:18px 16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:28px;
+      line-height:1.18;
+      color:var(--accent);
+    }
+    .intro{
+      margin:0;
+      font-size:16px;
+      line-height:1.45;
+      color:var(--ink);
+    }
+    .card{
+      background:var(--card);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+      margin-bottom:14px;
+    }
+    .tag{
+      display:inline-block;
+      background:var(--primary);
+      color:#fff;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .pistas{
+      display:grid;
+      gap:10px;
+    }
+    .pista{
+      background:var(--soft);
+      border:1px solid #d6eaf3;
+      border-radius:16px;
+      padding:12px;
+    }
+    .pista strong{
+      display:block;
+      color:var(--primary-dark);
+      margin-bottom:4px;
+      font-size:15px;
+    }
+    .pista span{
+      font-size:14px;
+      line-height:1.35;
+      color:var(--muted);
+    }
+    .field{
+      margin-bottom:12px;
+    }
+    label{
+      display:block;
+      font-weight:700;
+      color:var(--primary-dark);
+      margin-bottom:6px;
+      font-size:15px;
+    }
+    input, textarea{
+      width:100%;
+      border:2px solid var(--line);
+      border-radius:15px;
+      padding:13px 14px;
+      font-size:16px;
+      background:#fff;
+      color:var(--ink);
+      outline:none;
+    }
+    textarea{
+      min-height:180px;
+      resize:vertical;
+      line-height:1.5;
+    }
+    input:focus, textarea:focus{
+      border-color:var(--primary);
+    }
+    .hint{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:6px;
+      line-height:1.35;
+    }
+    .check{
+      background:var(--soft);
+      border-radius:16px;
+      padding:12px 14px;
+      border:1px solid #d6eaf3;
+      margin-top:10px;
+    }
+    .check h3{
+      margin:0 0 8px;
+      font-size:15px;
+      color:var(--primary-dark);
+    }
+    .check ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .actions{
+      position:sticky;
+      bottom:0;
+      background:linear-gradient(to top, rgba(207,227,239,1) 70%, rgba(207,227,239,0));
+      padding-top:10px;
+      margin-top:8px;
+    }
+    .btn{
+      width:100%;
+      border:none;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:16px;
+      font-weight:700;
+      margin-bottom:10px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn.secondary{
+      background:#fff;
+      color:var(--primary);
+      border:2px solid var(--primary);
+    }
+    .small{
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+      margin-top:6px;
+    }
+
+    .sources-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    .source-btn{
+      border:none;
+      border-radius:14px;
+      padding:12px 10px;
+      background:#0b6f95;
+      color:#fff;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .source-btn span{
+      display:block;
+      font-size:12px;
+      font-weight:400;
+      opacity:.95;
+      margin-top:4px;
+      line-height:1.25;
+    }
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.78);
+      z-index:9999;
+      padding:14px;
+      overflow:auto;
+    }
+    .modal-content{
+      max-width:900px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 12px 28px rgba(0,0,0,.35);
+    }
+    .modal-head{
+      background:#0b6f95;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      position:sticky;
+      top:0;
+    }
+    .modal-head h3{
+      margin:0;
+      font-size:18px;
+      line-height:1.2;
+    }
+    .close-btn{
+      border:none;
+      background:#fff;
+      color:#0b6f95;
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:14px;
+      flex-shrink:0;
+    }
+    .modal-body{
+      padding:10px;
+      background:#e9f4f9;
+    }
+    .modal-body iframe{
+      display:block;
+      width:100%;
+      min-height:78vh;
+      border:none;
+      border-radius:12px;
+      background:#fff;
+    }
+
+    .ok{
+      display:none;
+      margin-top:10px;
+      background:#eaf8f2;
+      color:#0a7a50;
+      border:1px solid #bfe4cf;
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:700;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Como se organizava o comércio ultramarino português no século XVI?</h1>
+      <p class="intro">Escreve uma síntese final com as tuas próprias palavras. Usa as pistas para te orientares, mas não copies.</p>
+    </section>
+
+    <section class="card">
+      <div class="tag">Pistas para responder</div>
+      <div class="pistas">
+        <div class="pista">
+          <strong>Quem controlava?</strong>
+          <span>Coroa Portuguesa</span>
+        </div>
+        <div class="pista">
+          <strong>Onde se centralizava?</strong>
+          <span>Casa da Índia, em Lisboa</span>
+        </div>
+        <div class="pista">
+          <strong>Como funcionava?</strong>
+          <span>Chegada de mercadorias, registo, pesagem e controlo</span>
+        </div>
+        <div class="pista">
+          <strong>Que resultado tinha?</strong>
+          <span>Receitas e reforço do poder régio</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="tag">Identificação do aluno</div>
+
+      <div class="field">
+        <label for="nome">Nome do aluno</label>
+        <input id="nome" type="text" autocomplete="name" />
+      </div>
+
+      <div class="field">
+        <label for="turma">Turma</label>
+        <input id="turma" type="text" />
+      </div>
+
+      <div class="field">
+        <label for="sintese">📝 Síntese Final</label>
+        <textarea id="sintese" placeholder="Com as tuas palavras, explica em 3 a 5 linhas como se organizava o comércio ultramarino português no século XVI."></textarea>
+        <div class="hint">Com as tuas palavras, explica em 3 a 5 linhas como se organizava o comércio ultramarino português no século XVI.</div>
+      </div>
+
+      <div class="check">
+        <h3>Antes de terminares, verifica se referiste:</h3>
+        <ul>
+          <li>a Coroa Portuguesa;</li>
+          <li>a Casa da Índia;</li>
+          <li>o controlo, registo e pesagem das mercadorias;</li>
+          <li>as receitas e o reforço do poder régio.</li>
+        </ul>
+      </div>
+
+      
+      <div class="check" style="margin-top:12px;">
+        <h3>Consulta novamente as fontes da questão orientadora:</h3>
+        <div class="sources-grid">
+          <button type="button" class="source-btn" data-title="F5 — Rotas e produtos do comércio ultramarino" data-img="https://drive.google.com/file/d/1J9B66b3OWnvyYGNFMDfw0LY_cGdyRQKk/preview">F5<span>Mapa das rotas e produtos</span></button>
+          <button type="button" class="source-btn" data-title="F6 — Novos mercados e produtos do ultramar" data-img="https://drive.google.com/file/d/1diQ6OHnuRtNFYCgty-YAXMtLox5jXvOO/preview">F6<span>Excerto sobre mercados e reexportação</span></button>
+          <button type="button" class="source-btn" data-title="F7 — O porto de Lisboa no século XVI" data-img="https://drive.google.com/file/d/1_PJ-ZeW1OqT4EgVofz0qN8GIE4S3DH9W/preview">F7<span>Lisboa, centro do comércio</span></button>
+          <button type="button" class="source-btn" data-title="F8 — Instrumento de pesagem comercial" data-img="https://drive.google.com/file/d/1W-c_bG40i5oM8zQ_jYEFDAaB-E-5FDZh/preview">F8<span>Balança da Casa da Índia</span></button>
+          <button type="button" class="source-btn" data-title="F9 — Registo comercial do século XVI" data-img="https://drive.google.com/file/d/1gkYFYCocGnbTdXzjI_tmPLTThZmD0uzU/preview">F9<span>Registo, preços, moedas e medidas</span></button>
+          <button type="button" class="source-btn" data-title="F10 — Administração do comércio ultramarino" data-img="https://drive.google.com/file/d/14KOaspJEJWfrjTAPErhaaVsVWPq54Ujj/preview">F10<span>Casa da Índia e controlo régio</span></button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="downloadBtn">Descarregar resposta</button>
+        <button class="btn secondary" id="emailBtn">Abrir email</button>
+        <button class="btn secondary" id="modeloBtn">Inserir modelo de início</button>
+        <div class="small">Consulta novamente as fontes antes de escrever a tua síntese final.</div>
+        <div class="ok" id="okBox">Ficheiro descarregado com sucesso.</div>
+      </div>
+    </section>
+  </div>
+
+
+  <div class="modal" id="sourceModal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h3 id="modalTitle">Fonte</h3>
+        <button type="button" class="close-btn" id="closeModalBtn">Fechar</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="modalFrame" src="" title="Fonte da aula" allow="autoplay" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const emailDestino = 'up202510257@up.pt';
+    const nome = document.getElementById('nome');
+    const turma = document.getElementById('turma');
+    const sintese = document.getElementById('sintese');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const emailBtn = document.getElementById('emailBtn');
+    const modeloBtn = document.getElementById('modeloBtn');
+    const okBox = document.getElementById('okBox');
+
+    function buildText() {
+      return [
+        'Nome do aluno: ' + (nome.value.trim() || '________________'),
+        'Turma: ' + (turma.value.trim() || '________________'),
+        '',
+        'Questão orientadora:',
+        'Como se organizava o comércio ultramarino português no século XVI?',
+        '',
+        'Síntese final:',
+        (sintese.value.trim() || '________________')
+      ].join('\n');
+    }
+
+    function safeFileName(value) {
+      return value
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9-_]+/g, '_')
+        .replace(/^_+|_+$/g, '') || 'aluno';
+    }
+
+    downloadBtn.addEventListener('click', () => {
+      const text = buildText();
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const fileNome = safeFileName(nome.value) + '_' + safeFileName(turma.value || 'turma') + '_sintese_comercio_ultramarino.txt';
+      a.href = url;
+      a.download = fileNome;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      okBox.style.display = 'block';
+      setTimeout(() => okBox.style.display = 'none', 2500);
+    });
+
+    emailBtn.addEventListener('click', () => {
+      const subject = encodeURIComponent('Síntese final — Comércio ultramarino português');
+      const body = encodeURIComponent(buildText());
+      window.location.href = 'mailto:' + emailDestino + '?subject=' + subject + '&body=' + body;
+    });
+
+
+    const sourceButtons = document.querySelectorAll('.source-btn');
+    const sourceModal = document.getElementById('sourceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalFrame = document.getElementById('modalFrame');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    sourceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modalTitle.textContent = btn.dataset.title;
+        modalFrame.src = btn.dataset.img;
+        sourceModal.style.display = 'block';
+        sourceModal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeModal() {
+      sourceModal.style.display = 'none';
+      sourceModal.setAttribute('aria-hidden', 'true');
+      modalFrame.src = '';
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+
+    sourceModal.addEventListener('click', (e) => {
+      if (e.target === sourceModal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sourceModal.style.display === 'block') closeModal();
+    });
+
+    modeloBtn.addEventListener('click', () => {
+      if (!sintese.value.trim()) {
+        sintese.value = 'O comércio ultramarino português era controlado pela Coroa e centralizado na Casa da Índia, em Lisboa. As mercadorias que chegavam do ultramar eram registadas, pesadas e controladas. Este comércio gerava receitas para o rei e reforçava o poder régio.';
+      }
+      sintese.focus();
+    });
+  </script>
+</body>
+</html>
